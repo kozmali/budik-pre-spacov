@@ -2900,7 +2900,11 @@ fun AlarmSetupScreen(
                         Spacer(modifier = Modifier.height(10.dp))
 
                         Text(
-                            text = if (vibrationEnabled) "${vibrationStrength}\u00A0%" else "0\u00A0% (Vyp.)",
+                            text = if (vibrationEnabled) {
+                                "${vibrationStrength}\u00A0%"
+                            } else {
+                                if (appLanguage == "EN") "0\u00A0% (OFF)" else "0\u00A0% (Vyp.)"
+                            },
                             fontSize = 32.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = if (vibrationEnabled) primaryColor else textSecondary
