@@ -1,0 +1,3 @@
+﻿Táto aplikácia vznikla s jedným jasným cieľom – spoľahlivo zobudiť aj tvrdých spáčov. Počas zvonenia je obrazovka rozdelená na veľkú plochu pre Odloženie (73 %) a menšiu pre Vypnutie (27 %), aby si budík v polospánku omylom nevypol.
+
+Ak budík odkladáš pridlho a prekročíš nastavenú Poistku času, spustí sa núdzové pípanie a 5-líniový záchranný systém ťa ochráni pred vypnutím budíka v polospánku. Podporuje systémové zvuky, syntetizované melódie, vlastné MP3 súbory, YouTube aj Spotify skladby.
