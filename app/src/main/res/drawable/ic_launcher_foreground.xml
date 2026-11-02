@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Vrchné zvončeky budíka (Červeno-koralová) -->
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M30,29 L41,22 A4,4 0 0,1 46,26 L35,33 A4,4 0 0,1 30,29 Z" />
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M78,29 L67,22 A4,4 0 0,0 62,26 L73,33 A4,4 0 0,0 78,29 Z" />
+
+    <!-- Spodné nožičky -->
+    <path
+        android:strokeColor="#1E293B"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M38,74 L32,81 M70,74 L76,81" />
+
+    <!-- Telo budíka (Kráľovská modrá s tmavým ciferníkom) -->
+    <path
+        android:fillColor="#0F172A"
+        android:strokeColor="#4F7CFF"
+        android:strokeWidth="6"
+        android:pathData="M54,56m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0" />
+
+    <!-- Biele ručičky hodín -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4.5"
+        android:strokeLineCap="round"
+        android:pathData="M54,56 L54,42 M54,56 L44,63" />
+
+    <!-- Červený stred -->
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M54,56m-3.2,0a3.2,3.2 0,1 1,6.4 0a3.2,3.2 0,1 1,-6.4 0" />
+</vector>
