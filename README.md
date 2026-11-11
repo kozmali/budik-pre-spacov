@@ -12,7 +12,7 @@
 Aplikáciu si môžeš stiahnuť priamo ako inštalačný súbor `.apk` alebo si ju pridať do aplikácie **Obtainium** pre automatické aktualizácie priamo z GitHubu:
 
 [![Stiahnuť APK z GitHub Releases](https://img.shields.io/badge/GitHub_Releases-Stiahnuť_APK-2ea44f?style=for-the-badge&logo=github)](https://github.com/kozmali/budik-pre-spacov/releases/latest)
-[![Pridať do Obtainium](https://img.shields.io/badge/Obtainium-Automatické_aktualizácie-4F7CFF?style=for-the-badge&logo=android)](https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://github.com/kozmali/budik-pre-spacov)
+[![Pridať do Obtainium](https://img.shields.io/badge/Obtainium-Automatické_aktualizácie-4F7CFF?style=for-the-badge&logo=android)](https://apps.obtainium.imranr.dev/redirect.html?r=obtainium%3A%2F%2Fadd%2Fhttps%253A%252F%252Fgithub.com%252Fkozmali%252Fbudik-pre-spacov)
 
 ---
 
