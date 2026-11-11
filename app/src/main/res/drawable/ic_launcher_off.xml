@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground>
+        <layer-list>
+            <item android:drawable="@drawable/ic_launcher_foreground" />
+            <item android:drawable="@drawable/ic_badge_off_overlay" />
+        </layer-list>
+    </foreground>
+</adaptive-icon>

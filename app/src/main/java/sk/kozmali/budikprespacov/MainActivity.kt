@@ -1579,6 +1579,48 @@ fun BlueThemedTimePickerDialog(
     )
 }
 
+fun updateLauncherIcon(context: Context, isAlarmEnabled: Boolean) {
+    try {
+        val pm = context.packageManager
+        val onComponent = android.content.ComponentName(context, "sk.kozmali.budikprespacov.LauncherIconOn")
+        val offComponent = android.content.ComponentName(context, "sk.kozmali.budikprespacov.LauncherIconOff")
+
+        val desiredOnState = if (isAlarmEnabled) {
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+        } else {
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+        }
+
+        val desiredOffState = if (isAlarmEnabled) {
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+        } else {
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+        }
+
+        val currentOnState = pm.getComponentEnabledSetting(onComponent)
+        val currentOffState = pm.getComponentEnabledSetting(offComponent)
+
+        val isOnAlreadySet = (isAlarmEnabled && (currentOnState == PackageManager.COMPONENT_ENABLED_STATE_ENABLED || currentOnState == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)) ||
+                (!isAlarmEnabled && currentOnState == PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
+
+        val isOffAlreadySet = (!isAlarmEnabled && currentOffState == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) ||
+                (isAlarmEnabled && (currentOffState == PackageManager.COMPONENT_ENABLED_STATE_DISABLED || currentOffState == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT))
+
+        if (!isOnAlreadySet || !isOffAlreadySet) {
+            pm.setComponentEnabledSetting(
+                onComponent,
+                desiredOnState,
+                PackageManager.DONT_KILL_APP
+            )
+            pm.setComponentEnabledSetting(
+                offComponent,
+                desiredOffState,
+                PackageManager.DONT_KILL_APP
+            )
+        }
+    } catch (_: Exception) {}
+}
+
 class MainActivity : ComponentActivity() {
     private var sharedLinkState = mutableStateOf<Pair<String, String>?>(null)
 
@@ -1592,6 +1634,15 @@ class MainActivity : ComponentActivity() {
             AlarmSetupScreen(sharedLinkState.value) {
                 sharedLinkState.value = null
             }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (!isChangingConfigurations) {
+            val prefs = getSharedPreferences("budik_pre_spacov_prefs", Context.MODE_PRIVATE)
+            val isAlarmEnabled = prefs.getBoolean("is_enabled", true)
+            updateLauncherIcon(this, isAlarmEnabled)
         }
     }
 
@@ -5485,8 +5536,10 @@ class AlarmRingActivity : ComponentActivity() {
                             isClosingScreen = true
                             isActivelyRingingSession = false
                             stopEmergencyBeepImmediately()
+                            val alarmH = prefs.getInt("alarm_hour", 7)
+                            val alarmM = prefs.getInt("alarm_min", 45)
+                            val keepEnabled = prefs.getBoolean("is_enabled", true)
                             prefs.edit()
-                                .putBoolean("is_enabled", false)
                                 .putInt("failsafe_stage", 1)
                                 .putInt("alarm_escalation_boost", 0)
                                 .putInt("failsafe_escalation_boost", 0)
@@ -5494,12 +5547,17 @@ class AlarmRingActivity : ComponentActivity() {
                                 .putInt("failsafe_snooze_count", 0)
                                 .putLong("first_ring_timestamp", 0L)
                                 .apply()
+                            // Zruší prípadné dnešné odložené zvonenia (snooze / wakeup check)
                             AlarmScheduler.cancelAlarm(this@AlarmRingActivity)
+                            // Ak bol denný budík zapnutý, rovno ho naplánuje na ďalší deň
+                            if (keepEnabled) {
+                                AlarmScheduler.scheduleDailyAlarm(this@AlarmRingActivity, alarmH, alarmM)
+                            }
                             AlarmScheduler.updateScheduledStatusNotification(
                                 context = this@AlarmRingActivity,
-                                isEnabled = false,
-                                alarmHour = prefs.getInt("alarm_hour", 7),
-                                alarmMin = prefs.getInt("alarm_min", 45),
+                                isEnabled = keepEnabled,
+                                alarmHour = alarmH,
+                                alarmMin = alarmM,
                                 failsafeHour = failsafeHour,
                                 failsafeMin = failsafeMin,
                                 strings = strings

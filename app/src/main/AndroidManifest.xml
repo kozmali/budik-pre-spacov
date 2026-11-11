@@ -25,7 +25,6 @@
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -33,6 +32,36 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
+        <!-- 1. Ikona pre ZAPNUTÝ budík (štandardná) -->
+        <activity-alias
+            android:name="sk.kozmali.budikprespacov.LauncherIconOn"
+            android:targetActivity="sk.kozmali.budikprespacov.MainActivity"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:label="Budík pre spáčov">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 2. Ikona pre VYPNUTÝ budík (s nápisom OFF) -->
+        <activity-alias
+            android:name="sk.kozmali.budikprespacov.LauncherIconOff"
+            android:targetActivity="sk.kozmali.budikprespacov.MainActivity"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher_off"
+            android:roundIcon="@drawable/ic_launcher_off"
+            android:label="Budík pre spáčov">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
         <activity
             android:name="sk.kozmali.budikprespacov.AlarmRingActivity"
