@@ -12,8 +12,8 @@ android {
     defaultConfig {
         applicationId = "sk.kozmali.budikprespacov"
         minSdk = 26
-        targetSdk = 37
-        versionCode = 1
+        targetSdk = 36
+        versionCode = 2
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
